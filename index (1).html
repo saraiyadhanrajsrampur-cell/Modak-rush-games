@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Modak Rush — A Ganesh Chaturthi Game</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="game-wrap">
+  <div id="shakeLayer">
+    <canvas id="bgCanvas"></canvas>
+    <canvas id="gameCanvas"></canvas>
+    <div class="blessing-vignette" id="blessVignette"></div>
+  </div>
+
+  <div class="hud">
+    <div class="top-left">
+      <div class="pill"><span class="ic">🪔</span><span id="scoreVal">0</span></div>
+      <div class="pill"><span class="ic">🥥</span><span id="coinVal">0</span></div>
+    </div>
+    <div class="top-right">
+      <div style="display:flex; gap:8px;">
+        <div id="muteBtn">🔊</div>
+        <div id="pauseBtn">❚❚</div>
+      </div>
+      <div class="pill" style="margin-top:4px;"><span class="ic">🎊</span> Lv <span id="levelVal">1</span></div>
+      <div class="lives" id="livesRow"></div>
+    </div>
+  </div>
+
+  <div class="power-bar" id="powerBar"></div>
+  <div class="combo-badge" id="comboBadge">COMBO x1</div>
+
+  <div class="flash-banner" id="flashBanner"></div>
+
+  <div id="ultimateWrap">
+    <div id="ultimateTrack"><div id="ultimateFill"></div></div>
+    <button id="ultimateBtn">🙏 Bappa's Blessing</button>
+  </div>
+
+  <div id="controls">
+    <div class="touch-zone" id="leftZone"></div>
+    <div class="touch-zone" id="rightZone"></div>
+  </div>
+
+  <!-- START SCREEN -->
+  <div class="screen" id="startScreen">
+    <div class="modak-icon-big">🐭🔶</div>
+    <div class="title-lockup">MODAK RUSH</div>
+    <div class="best-badge" id="bestBadgeStart">Best: 0</div>
+    <div class="subtitle">Swipe or tap left/right to switch lanes, chain combos, fill Bappa's Blessing meter, and light up every level before the visarjan bell!</div>
+    <div class="btn-row">
+      <button class="btn" id="startBtn">Start Game</button>
+      <button class="btn secondary" id="howToBtn">How to Play</button>
+    </div>
+  </div>
+
+  <!-- HOW TO PLAY -->
+  <div class="screen hidden" id="howToScreen">
+    <div class="title-lockup" style="font-size:26px;">HOW TO PLAY</div>
+    <div class="instructions">
+      <div><span class="ic">↔️</span>Swipe or tap sides to change lane</div>
+      <div><span class="ic">🔶</span>Catch modaks &amp; coins, chain combos</div>
+      <div><span class="ic">🌵</span>Dodge vighnas — 3 hits ends your run</div>
+      <div><span class="ic">✨</span>Grab glowing power-ups for boosts</div>
+      <div><span class="ic">🙏</span>Fill the meter, tap for Bappa's Blessing</div>
+      <div><span class="ic">🏆</span>Beat your best score every run</div>
+    </div>
+    <button class="btn" id="backToStartBtn">Got it!</button>
+  </div>
+
+  <!-- PAUSE SCREEN -->
+  <div class="screen hidden" id="pauseScreen">
+    <div class="title-lockup" style="font-size:30px;">PAUSED</div>
+    <div class="btn-row">
+      <button class="btn" id="resumeBtn">Resume</button>
+      <button class="btn secondary" id="restartFromPauseBtn">Restart</button>
+    </div>
+  </div>
+
+  <!-- GAME OVER SCREEN -->
+  <div class="screen hidden" id="overScreen">
+    <div class="modak-icon-big">💫</div>
+    <div class="title-lockup" style="font-size:32px;">GAME OVER</div>
+    <div id="newBestOver" class="new-best" style="display:none;">🏆 New Best Score!</div>
+    <div class="stat-row">
+      <div class="stat"><div class="num" id="finalScore">0</div><div class="lbl">SCORE</div></div>
+      <div class="stat"><div class="num" id="finalCoins">0</div><div class="lbl">COINS</div></div>
+      <div class="stat"><div class="num" id="finalCombo">x1</div><div class="lbl">BEST COMBO</div></div>
+      <div class="stat"><div class="num" id="finalLevel">1</div><div class="lbl">LEVEL</div></div>
+    </div>
+    <div class="best-badge" id="bestBadgeOver">Best: 0</div>
+    <div class="btn-row">
+      <button class="btn" id="retryBtn">Play Again</button>
+    </div>
+  </div>
+
+  <!-- VICTORY SCREEN -->
+  <div class="screen hidden" id="victoryScreen">
+    <div class="modak-icon-big">🙏🔶🎉</div>
+    <div class="title-lockup">GANPATI BAPPA MORYA!</div>
+    <div id="newBestVictory" class="new-best" style="display:none;">🏆 New Best Score!</div>
+    <div class="subtitle">You carried every modak home — Bappa's blessing is complete!</div>
+    <div class="stat-row">
+      <div class="stat"><div class="num" id="victoryScore">0</div><div class="lbl">SCORE</div></div>
+      <div class="stat"><div class="num" id="victoryCoins">0</div><div class="lbl">COINS</div></div>
+      <div class="stat"><div class="num" id="victoryCombo">x1</div><div class="lbl">BEST COMBO</div></div>
+    </div>
+    <div class="btn-row">
+      <button class="btn" id="victoryRetryBtn">Play Again</button>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
